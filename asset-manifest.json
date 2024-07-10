@@ -1,16 +1,20 @@
 {
   "files": {
-    "main.css": "/gakuen_idolmaster_front/static/css/main.f855e6bc.css",
-    "main.js": "/gakuen_idolmaster_front/static/js/main.f568c821.js",
-    "static/js/453.7e078e25.chunk.js": "/gakuen_idolmaster_front/static/js/453.7e078e25.chunk.js",
-    "static/media/logo.svg": "/gakuen_idolmaster_front/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/gakuen_idolmaster_front/index.html",
-    "main.f855e6bc.css.map": "/gakuen_idolmaster_front/static/css/main.f855e6bc.css.map",
-    "main.f568c821.js.map": "/gakuen_idolmaster_front/static/js/main.f568c821.js.map",
-    "453.7e078e25.chunk.js.map": "/gakuen_idolmaster_front/static/js/453.7e078e25.chunk.js.map"
+    "main.css": "/static/css/main.cd5b8130.css",
+    "main.js": "/static/js/main.c9f23b00.js",
+    "static/js/453.400007e6.chunk.js": "/static/js/453.400007e6.chunk.js",
+    "static/media/ssr.webp": "/static/media/ssr.8fe9477d0ada33be7a28.webp",
+    "static/media/sr.webp": "/static/media/sr.4128c86cd2d1d3628abd.webp",
+    "static/media/dance.webp": "/static/media/dance.783e9fec2ef590dd31f3.webp",
+    "static/media/vocal.webp": "/static/media/vocal.fee2518d80514c8541b5.webp",
+    "static/media/visual.webp": "/static/media/visual.a0a4110d77df807150ba.webp",
+    "index.html": "/index.html",
+    "main.cd5b8130.css.map": "/static/css/main.cd5b8130.css.map",
+    "main.c9f23b00.js.map": "/static/js/main.c9f23b00.js.map",
+    "453.400007e6.chunk.js.map": "/static/js/453.400007e6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f855e6bc.css",
-    "static/js/main.f568c821.js"
+    "static/css/main.cd5b8130.css",
+    "static/js/main.c9f23b00.js"
   ]
 }
