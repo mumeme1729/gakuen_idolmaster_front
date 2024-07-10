@@ -1,0 +1,146 @@
+.card_list_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 98%; /* 親コンテナの幅に合わせる */
+}
+
+/* コンテナ */
+.card_container {
+    border: 1px solid #000;
+    padding: 10px;
+    margin: 5px;
+    width: 100%; /* フレキシブルな横幅を指定 */
+    max-width: 600px; /* 最大幅を設定 */
+    box-sizing: border-box; /* パディングを含めたボックスサイズを指定 */
+  }
+
+  .card_name {
+    display: flex;
+    text-align: left;
+    margin-bottom: 20px;
+    width: 100%; /* 親コンテナの幅に合わせる */
+  }
+
+  .card_left {
+    width: 40%;
+    margin-top: -30px;
+    
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%; /* 親コンテナの幅に合わせる */
+  }
+  
+  .card_header {
+    margin-bottom: 5px;
+  }
+
+/* イメージ */
+  .image_container {
+    position: relative; /* アイコン画像の位置を基準にするために相対位置を設定 */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* コンテンツを中央揃え */
+  }
+  
+  .icon_image_container {
+    position: absolute; /* 絶対位置を設定 */
+    top: 1px; /* 必要に応じて調整 */
+    left: -3px; /* 必要に応じて調整 */
+    z-index: 1; /* 他のコンテンツの上に表示 */
+  }
+
+  .icon_image {
+    width: 80%;
+  }
+  
+  .support_card_image {
+    width: 100%; /* コンテナの幅に合わせる */
+    height: 100px; /* 必要に応じて高さを設定 */
+    object-fit: cover; /* 画像をコンテナに収めて切り取る */
+    object-position: center; /* 中央部分を表示 */
+  }
+  
+  .rarity_image_container {
+    position: absolute; /* 絶対位置を設定 */
+    top: 70px; /* 必要に応じて調整 */
+    left: 110px; /* 必要に応じて調整 */
+    z-index: 1; /* 他のコンテンツの上に表示 */
+  }
+
+  .rarity_image {
+    width: 100%;
+  }
+
+  /* 右側 */
+  /* ステータス表示 */
+  .card_right {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-top: -10px;
+  }
+  
+  .status_table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .status_label th, 
+  .status_value td {
+    border: 1px solid #ddd;
+    padding: 3px;
+    text-align: center;
+  }
+  
+  .status_label th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .status_value td {
+    background-color: #fff;
+  }
+
+  /* ドロップダウン */
+  .mozi {
+    font-size: 10px;
+    text-align: left;
+  }
+  .dropdown_container {
+    width: 100%; /* 親コンテナの幅に合わせる */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px; /* テーブルとの間にスペースを作る */
+  }
+  
+  .dropdown {
+    width: 100%; /* ドロップダウンリストの幅を親コンテナに合わせる */
+    padding: 5px; /* 内側のパディングを追加 */
+    font-size: 12px; /* フォントサイズを調整 */
+  }
+
+  @media (max-width: 600px) {
+    .status_label th,
+    .status_value td {
+      font-size: 10px; /* 小さい画面でのフォントサイズ */
+    }
+  }
+  
+  @media (min-width: 601px) and (max-width: 900px) {
+    .status_label th,
+    .status_value td {
+      font-size: 12px; /* 中くらいの画面でのフォントサイズ */
+    }
+  }
+  
+  @media (min-width: 901px) {
+    .status_label th,
+    .status_value td {
+      font-size: 14px; /* 大きい画面でのフォントサイズ */
+    }
+  }
