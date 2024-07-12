@@ -1,5 +1,6 @@
 import { Button,  } from '@material-ui/core';
-import React from 'react';
+
+import React,{ useState } from 'react';
 
 import { SupportCardBasicSchema } from '../../types/SupportCardTypes';
 import styles from './styles/SupportCard.module.css';
@@ -27,6 +28,9 @@ const getImage = () => {
         return ''; // デフォルトの画像または空
     }
     };
+
+
+
   
   return (
     <div className={styles.card_container}>
@@ -48,12 +52,16 @@ const getImage = () => {
             </div>
         </div>
         <div className={styles.card_right}>
-        <div className={styles.mozi}>所持状況</div>
+        <div className={styles.mozi}>所持状況(未実装)</div>
         <div className={styles.dropdown_container}>
             <select className={styles.dropdown}>
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+              <option value="not_have">未所持</option>
+              <option value="0">0凸</option>
+              <option value="1">1凸</option>
+              <option value="2">2凸</option>
+              <option value="3">3凸</option>
+              <option value="4">4凸</option>
+              <option value="max">MAX</option>
             </select>
           </div>
         <table className={styles.status_table}>
