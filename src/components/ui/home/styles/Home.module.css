@@ -24,6 +24,7 @@
     max-width: 600px; /* 最大幅を設定 */
     box-sizing: border-box; /* パディングを含めたボックスサイズを指定 */
     position: relative; /* 相対位置を設定 */
+    margin-bottom: 15px;
   }
   .output_title {
     position: absolute;

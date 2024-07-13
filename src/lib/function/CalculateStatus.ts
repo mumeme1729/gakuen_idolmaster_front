@@ -20,7 +20,14 @@ import { voLessonBonusState, daLessonBonusState, viLessonBonusState } from '../.
 import {PeriodTable,ParameterTable, currentPeriodParameterTable} from '../../lib/common/types'
 
 
-export const useAfterLessonStatus = (selectedPeriod: string, selectedLessonType:string, aggregatedValues:{[key: string]: number}) => {
+export const useAfterLessonStatus = (
+    targtVoStatus : number,
+    targtDaStatus : number,
+    targtViStatus : number,
+    selectedPeriod: string, 
+    selectedLessonType:string, 
+    aggregatedValues:{[key: string]: number}
+) => {
     const params = currentPeriodParameterTable.find(period => period.periodId === selectedPeriod);
     const rate = ParameterTable.find(parameter=>parameter.id === params?.valueId)
     const period = PeriodTable.find(period => period.id === selectedPeriod)
@@ -32,19 +39,16 @@ export const useAfterLessonStatus = (selectedPeriod: string, selectedLessonType:
     }
     key += "-" + selectedLessonType
     const aggregatedValue = aggregatedValues[key] ?? 0;
-    // 現在のステータス
-    const currentVo = useRecoilValue(currentVoState);
-    const currentDa = useRecoilValue(currentDaState);
-    const currentVi = useRecoilValue(currentViState);
+
   
     // 各レスボ
     const voLessonBonus = useRecoilValue(voLessonBonusState);
     const daLessonBonus = useRecoilValue(daLessonBonusState);
     const viLessonBonus = useRecoilValue(viLessonBonusState);
 
-    let adjustedVoStatus = currentVo;
-    let adjustedDaStatus = currentDa;
-    let adjustedViStatus = currentVi;
+    let adjustedVoStatus = targtVoStatus;
+    let adjustedDaStatus = targtDaStatus;
+    let adjustedViStatus = targtViStatus;
   
     if (selectedLessonType === "Vocal" && params?.periodId !== "P5"){
         let inc = (rate?.value ?? 0) + ((rate?.value ?? 0) * voLessonBonus);
@@ -87,5 +91,5 @@ export const useAfterLessonStatus = (selectedPeriod: string, selectedLessonType:
     adjustedDaStatus = Math.min(Math.floor(adjustedDaStatus), 1500);
     adjustedViStatus = Math.min(Math.floor(adjustedViStatus), 1500);
     // 値をセット
-    return { afterVo: adjustedVoStatus, afterDa: adjustedDaStatus, afterVi: adjustedViStatus, nextPeriodId: params?.nextPeriodId };
+    return { adjustedVoStatus, adjustedDaStatus, adjustedViStatus };
   };
