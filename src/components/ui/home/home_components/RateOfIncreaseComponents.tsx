@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import { rateOfIncreaseState } from '../../../../state/RateOfIncreaseState';
 import styles from "../styles/Home.module.css";
 const lessons = [
-    { value: 'sp', label: 'SP' },
+    { value: 'SP', label: 'SP' },
     { value: '通常', label: '通常' },
   ];
   

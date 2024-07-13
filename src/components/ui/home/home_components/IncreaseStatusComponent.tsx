@@ -19,7 +19,7 @@ interface IncreaseStatusProps {
           <TextField
             type="number"
             label="Voステ"
-            defaultValue={vocalValue}
+            value={vocalValue}
             variant="standard"
             InputLabelProps={{
               shrink: true,
@@ -30,7 +30,7 @@ interface IncreaseStatusProps {
             type="number"
             label="Daステ"
             variant="standard"
-            defaultValue={danceValue}
+            value={danceValue}
             InputLabelProps={{
               shrink: true,
             }}
@@ -39,7 +39,7 @@ interface IncreaseStatusProps {
           <TextField
             type="number"
             label="Viステ"
-            defaultValue={visualValue}
+            value={visualValue}
             variant="standard"
             InputLabelProps={{
               shrink: true,
