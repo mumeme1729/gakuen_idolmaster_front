@@ -19,15 +19,6 @@ import {
     afterVoState,
     afterDaState,
     afterViState,
-    nextVoState,
-    nextDaState,
-    nextViState,
-    nextNextVoState,
-    nextNextDaState,
-    nextNextViState,
-    nextNextNextVoState,
-    nextNextNextDaState,
-    nextNextNextViState
  } from '../../../state/StatusState';
 import { useAfterLessonStatus } from '../../../lib/function/CalculateStatus';
 
@@ -39,25 +30,12 @@ const Home:React.FC = () => {
     const [selectedNextLessonType, setSelectedNextLessonType] = useState<string>("Vocal");
     const [selectedNextNextLessonType, setSelectedNextNextLessonType] = useState<string>("Vocal");
     const [selectedNextNextNextLessonType, setSelectedNextNextNextLessonType] = useState<string>("Vocal");
+    const [afterStatusSum, setAfterStatusSum] = useState<number>(0);
+    const [nextStatusSum, setNextStatusSum] = useState<number>(0);
+    const [nextNextStatusSum, setNextNextStatusSum] = useState<number>(0);
+    const [nextNextNextStatusSum, setNextNextNextStatusSum] = useState<number>(0);
+    
     const rateOfIncrease = useRecoilValue(rateOfIncreaseState);
-
-    // レッスン後状態
-    const setAfterVoState = useSetRecoilState(afterVoState);
-    const setAfterDaState = useSetRecoilState(afterDaState);
-    const setAfterViState = useSetRecoilState(afterViState);
-    // 次回後状態
-    const setNextVoState = useSetRecoilState(nextVoState);
-    const setNextDaState = useSetRecoilState(nextDaState);
-    const setNextViState = useSetRecoilState(nextViState);
-
-    // 次々回後状態
-    const setNextNextVoState = useSetRecoilState(nextNextVoState);
-    const setNextNextDaState = useSetRecoilState(nextNextDaState);
-    const setNextNextViState = useSetRecoilState(nextNextViState);
-    // 次々々回後状態
-    const setNextNextNextVoState = useSetRecoilState(nextNextNextVoState);
-    const setNextNextNextDaState = useSetRecoilState(nextNextNextDaState);
-    const setNextNextNextViState = useSetRecoilState(nextNextNextViState);
 
     // 現在のステータス
     const currentVo = useRecoilValue(currentVoState);
@@ -128,31 +106,6 @@ const Home:React.FC = () => {
         aggregatedValues
     );
 
-    // レッスン後
-    useEffect(() => {
-        setAfterVoState(afterVo);
-        setAfterDaState(afterDa);
-        setAfterViState(afterVi);
-      }, [afterVo, afterDa, afterVi, setAfterVoState, setAfterDaState, setAfterViState]);
-    // 次回
-    // useEffect(() => {
-    //     setNextVoState(nextLesson.adjustedVoStatus);
-    //     setNextDaState(nextLesson.adjustedDaStatus);
-    //     setNextViState(nextLesson.adjustedViStatus);
-    // }, [nextLesson, setNextVoState, setNextDaState, setNextViState]);
-    // // 次々回
-    // useEffect(() => {
-    //     setNextNextVoState(nextNextLesson.adjustedVoStatus);
-    //     setNextNextDaState(nextNextLesson.adjustedDaStatus);
-    //     setNextNextViState(nextNextLesson.adjustedViStatus);
-    // }, [nextNextLesson, setNextNextVoState, setNextNextDaState, setNextNextViState]);
-    // // 次々々回
-    // useEffect(() => {
-    //     setNextNextNextVoState(nextNextNextLesson.adjustedVoStatus);
-    //     setNextNextNextDaState(nextNextNextLesson.adjustedDaStatus);
-    //     setNextNextNextViState(nextNextNextLesson.adjustedViStatus);
-    // }, [nextNextNextLesson, setNextNextNextVoState, setNextNextNextDaState, setNextNextNextViState]);
-    
 
     return (
         <>
@@ -167,6 +120,11 @@ const Home:React.FC = () => {
                     <LessonBonusComponents/>
                 </div>
                 <div className={styles.home_body_container}>
+                    <div className={styles.status_field_selector}>
+                        <div className={styles.total_text}>
+                            合計: {currentVo+currentDa+currentVi}
+                        </div>
+                    </div>
                     <CurrentStatusComponents/>
                 </div>
                 <div>
@@ -174,30 +132,48 @@ const Home:React.FC = () => {
                     <LessonTypeDropdown selectedLessonType={selectedLessonType} setSelectedLessonType={setSelectedLessonType}/>
                 </div>
                 <div className={styles.home_body_container_output}>
-                <div className={styles.output_title}>レッスン後</div>
+                <div className={styles.output_title}>レッスン後予想ステータス</div>
+                    <div className={styles.status_field_selector}>
+                        <div className={styles.total_text}>
+                            合計: {afterStatusSum}
+                        </div>
+                    </div>
                     <IncreaseStatusComponents
-                        vocalValue={afterVo}
-                        danceValue={afterDa}
-                        visualValue={afterVi}
-                    />
+                            vocalValue={afterVo}
+                            danceValue={afterDa}
+                            visualValue={afterVi}
+                            preVocalValue={currentVo}
+                            preDanceValue={currentDa}
+                            preVisualValue={currentVi}
+                            setStatusSum={setAfterStatusSum}
+                        />
                 </div>
                 {nextPeriodParams && (
                     <>
                         <div className={styles.home_body_container_output}>
-                        <div className={styles.output_title}>次回({nextPeriod?.name})</div>
-                        {
-                            nextPeriodParams.periodId === "P5"
-                            ?null
-                            :
-                            <LessonTypeDropdown
-                                selectedLessonType={selectedNextLessonType}
-                                setSelectedLessonType={setSelectedNextLessonType}
-                            />
-                        }
+                        <div className={styles.output_title}>次回({nextPeriod?.name})後予想ステータス</div>
+                        <div className={styles.status_field_selector}>
+                            {
+                                nextPeriodParams.periodId === "P5"
+                                ?null
+                                :
+                                <LessonTypeDropdown
+                                    selectedLessonType={selectedNextLessonType}
+                                    setSelectedLessonType={setSelectedNextLessonType}
+                                />
+                            }
+                            <div className={styles.total_text}>
+                                合計: {nextStatusSum}
+                            </div>
+                        </div>
                         <IncreaseStatusComponents
                              vocalValue={nextLesson.adjustedVoStatus}
                              danceValue={nextLesson.adjustedDaStatus}
                              visualValue={nextLesson.adjustedViStatus}
+                             preVocalValue={afterVo}
+                             preDanceValue={afterDa}
+                             preVisualValue={afterVi}
+                             setStatusSum={setNextStatusSum}
                         />
                         </div>
                     </>
@@ -206,20 +182,29 @@ const Home:React.FC = () => {
                 {nextNextPeriodParams && (
                     <>
                         <div className={styles.home_body_container_output}>
-                        <div className={styles.output_title}>次々回({nextNextPeriod?.name})</div>
-                        {
-                            nextNextPeriodParams.periodId === "P5"
-                            ?null
-                            :
-                            <LessonTypeDropdown
-                                selectedLessonType={selectedNextNextLessonType}
-                                setSelectedLessonType={setSelectedNextNextLessonType}
-                            />
-                        }
+                        <div className={styles.output_title}>次々回({nextNextPeriod?.name})後予想ステータス</div>
+                        <div className={styles.status_field_selector}>
+                            {
+                                nextNextPeriodParams.periodId === "P5"
+                                ?null
+                                :
+                                <LessonTypeDropdown
+                                    selectedLessonType={selectedNextNextLessonType}
+                                    setSelectedLessonType={setSelectedNextNextLessonType}
+                                />
+                            }
+                            <div className={styles.total_text}>
+                                合計: {nextNextStatusSum}
+                            </div>
+                        </div>
                         <IncreaseStatusComponents
                             vocalValue={nextNextLesson.adjustedVoStatus}
                             danceValue={nextNextLesson.adjustedDaStatus}
                             visualValue={nextNextLesson.adjustedViStatus}
+                            preVocalValue={nextLesson.adjustedVoStatus}
+                            preDanceValue={nextLesson.adjustedDaStatus}
+                            preVisualValue={nextLesson.adjustedViStatus}
+                            setStatusSum={setNextNextStatusSum}
                         />
                         </div>
                     </>
@@ -227,20 +212,29 @@ const Home:React.FC = () => {
                 {nextNextNextPeriodParams && (
                     <>
                         <div className={styles.home_body_container_output}>
-                        <div className={styles.output_title}>次々々回({nextNextNextPeriod?.name})</div>
-                        {
-                            nextNextNextPeriodParams.periodId === "P5"
-                            ?null
-                            :
-                            <LessonTypeDropdown
-                                selectedLessonType={selectedNextNextNextLessonType}
-                                setSelectedLessonType={setSelectedNextNextNextLessonType}
-                            />
-                        }
+                        <div className={styles.output_title}>次々々回({nextNextNextPeriod?.name})後予想ステータス</div>
+                        <div className={styles.status_field_selector}>
+                            {
+                                nextNextNextPeriodParams.periodId === "P5"
+                                ?null
+                                :
+                                <LessonTypeDropdown
+                                    selectedLessonType={selectedNextNextNextLessonType}
+                                    setSelectedLessonType={setSelectedNextNextNextLessonType}
+                                />
+                            }
+                            <div className={styles.total_text}>
+                                合計: {nextNextNextStatusSum}
+                            </div>
+                        </div>
                         <IncreaseStatusComponents
                             vocalValue={nextNextNextLesson.adjustedVoStatus}
                             danceValue={nextNextNextLesson.adjustedDaStatus}
                             visualValue={nextNextNextLesson.adjustedViStatus}
+                            preVocalValue={nextNextLesson.adjustedVoStatus}
+                            preDanceValue={nextNextLesson.adjustedDaStatus}
+                            preVisualValue={nextNextLesson.adjustedViStatus}
+                            setStatusSum={setNextNextNextStatusSum}
                         />
                         </div>
                     </>

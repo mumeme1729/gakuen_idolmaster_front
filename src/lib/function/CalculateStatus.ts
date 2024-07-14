@@ -87,9 +87,9 @@ export const useAfterLessonStatus = (
     }
 
 
-    adjustedVoStatus = Math.min(Math.floor(adjustedVoStatus), 1500);
-    adjustedDaStatus = Math.min(Math.floor(adjustedDaStatus), 1500);
-    adjustedViStatus = Math.min(Math.floor(adjustedViStatus), 1500);
+    adjustedVoStatus = Math.floor(adjustedVoStatus);
+    adjustedDaStatus = Math.floor(adjustedDaStatus);
+    adjustedViStatus = Math.floor(adjustedViStatus);
     // 値をセット
     return { adjustedVoStatus, adjustedDaStatus, adjustedViStatus };
   };

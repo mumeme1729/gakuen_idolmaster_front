@@ -44,3 +44,15 @@
 .selector_container {
     display: flex;
 }
+
+/* ステータスフィールド */
+.status_field_selector {
+  display: flex;
+  align-items: center; /* 垂直方向に中央揃え */
+  margin-bottom: 5px;
+}
+
+.total_text {
+  text-align: center;
+  margin-left: 20px;
+}
